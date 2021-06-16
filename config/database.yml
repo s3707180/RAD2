@@ -4,22 +4,38 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
+
+# development:
+#   <<: *default
+#   database: db/development.sqlite3
+
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  url: postgres://mizkckjyxrezfs:b9904a29de9e8e63ee44b49d5c49920a8197098c8e06088364e6e4a3ff0afd49@ec2-34-193-113-223.compute-1.amazonaws.com:5432/d23jovgptmgrjo
+  # host: ec2-34-193-113-223.compute-1.amazonaws.com
+  # port: 5432
+  # database: d23jovgptmgrjo
+  # user: mizkckjyxrezfs
+  # # pool: 5
+  # sslmode: require
 
 development:
   <<: *default
-  database: db/development.sqlite3
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+  # url: postgres://sqaiqoggnvwlxi:ad8768e22efab87c7b7d8085ea8064c62024ee07eb3a39b6eca3543488f0dd9e@ec2-54-87-112-29.compute-1.amazonaws.com:5432/dbd6b2sit797uc
+  
 test:
   <<: *default
-  database: db/test.sqlite3
-
-production:
-  <<: *default
-  database: db/production.sqlite3
