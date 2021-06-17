@@ -1,5 +1,33 @@
 <h1>Quiz Attempt</h1>
 
-<%= render 'form', attempt: @attempt %>
+<%#= render 'form', attempt: @attempt %>
+
+
+
+<h3>
+(<%= @currentQuestion['id'] %>) <%= @currentQuestion['question'] %>
+</h3>
+<hr>
+
+<% @currentQuestion['answers'].size %>
+<br>
+<% @currentQuestion['answers']['answer_a'] %>
+<br>
+<% @currentQuestion['answers']['answer_b'] %>
+<br>
+
+<%= @currentQuestion['answers']['answer_f'] %>
+
+<hr>
+<% answers = @currentQuestion['answers']
+    answers.each do |key, value| 
+    if value then %>
+      <%= "Bob's #{key} is #{value}" %> <br>
+  <% end %>
+<% end %>
+
+
+<hr>
+
 
 <%= link_to 'Back', attempts_path %>

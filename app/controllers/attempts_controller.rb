@@ -1,3 +1,5 @@
+  require 'json'
+
 class AttemptsController < ApplicationController
   before_action :set_attempt, only: %i[ show edit update destroy ]
 
@@ -10,15 +12,33 @@ class AttemptsController < ApplicationController
   def show
   end
 
+
   # GET /attempts/new
   def new
     @attempt = Attempt.new
   end
 
-  # GET /attempts/quiz
+
+
+
+  # GET /attempts/quiz ----------------------
   def quiz
     @attempt = Attempt.new
+    quizFile = File.read('quiz.json')
+    @quizSource = JSON.parse(quizFile)
+    if (!session[:current_question])
+      session[:current_question_index] = 0;
+    end
+
+    @currentQuestion = @quizSource[session[:current_question_index]]
+    
   end
+
+
+
+
+
+
 
   # GET /attempts/1/edit
   def edit
