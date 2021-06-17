@@ -86,7 +86,7 @@ class AttemptsController < ApplicationController
       session[:total_questions] = nil
       session[:correct_answers] = nil
       session[:current_question_index] = nil;
-      session[:category] = nil;
+      # session[:category] = nil;
       
       if @@sessionsQuestions
         @@sessionsQuestions[sessionId] = nil;
@@ -130,6 +130,7 @@ class AttemptsController < ApplicationController
         
         # request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA"
         request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA&limit=#{session[:requested_number_of_questions]}&category=#{session[:category]}&difficulty=easy"
+        puts "request_uri: #{request_uri}"
         buffer = URI.open(request_uri).read
 
         puts "00000000000000000000000000000000000000000000000000000000"
@@ -142,7 +143,7 @@ class AttemptsController < ApplicationController
         
       rescue Exception => exc
          logger.error("Message for the log file #{exc.message}")
-         flash[:notice] = "Error reading from API, falling back to local quizes"
+         flash.notice = 'Error reading from API, falling back to local quizes'
   
         # load the questions if not done so already
         if (!@@quizSource)
@@ -251,9 +252,48 @@ class AttemptsController < ApplicationController
       session[:requested_number_of_questions] = number_of_questions
       session[:category] = category
       redirect_to action: "quiz"
+      return
     end
-  end
   
+    # preset value
+    @numPreset = session[:requested_number_of_questions]
+    @catPreset = session[:category]
+    
+    @linux_selected = ""
+    @devOps_selected = ""
+    @code_selected = ""
+    @cms_selected = ""    
+    
+    if (@catPreset == "Linux")
+      @linux_selected = "selected"
+    elsif (@catPreset == "DevOps")
+      @devOps_selected = "selected"
+    elsif (@catPreset == "Code")
+      @code_selected = "selected"
+    elsif (@catPreset == "CMS")
+      @cms_selected = "selected"
+    end
+
+    @selected_4 = ""
+    @selected_5 = ""
+    @selected_6 = ""
+    @selected_7 = ""
+    @selected_8 = ""
+
+    if (@numPreset == 4)
+      @selected_4 = "selected"
+    elsif (@numPreset == 5)
+      @selected_5 = "selected"
+    elsif (@numPreset == 6)
+      @selected_6 = "selected"
+    elsif (@numPreset == 7)
+      @selected_7 = "selected"
+    elsif (@numPreset == 8)
+      @selected_8 = "selected"
+    end
+
+  end
+
     # GET /attempts/clean
   def clean
       session[:test_complete] = false

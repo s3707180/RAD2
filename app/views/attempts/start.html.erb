@@ -4,15 +4,16 @@
 
 <div class="quiz">
 
+    
 <form action="/attempts/start" method="get">
   <label for="questionNumbers">Choose the number of Questions:</label>
   <br>
   <select name="questionNumbers" id="questionNumbers" style='height:40px;width:50px;'>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
+    <option value="4" <%= @selected_4 %> >4</option>
+    <option value="5" <%= @selected_5 %> >5</option>
+    <option value="6" <%= @selected_6 %> >6</option>
+    <option value="7" <%= @selected_7 %> >7</option>
+    <option value="8" <%= @selected_8 %> >8</option>
   </select>
   <br>
   <br>
@@ -21,10 +22,10 @@
   <label for="category">Choose the Category:</label>
   <br>
   <select name="category" id="category" style='height:40px;width:100px;'>
-    <option value="Linux">Linux</option>
-    <option value="DevOps">DevOps</option>
-    <option value="Code">Code</option>
-    <option value="CMS">CMS</option>
+    <option value="Linux" <%= @linux_selected %> >Linux</option>
+    <option value="DevOps" <%= @devOps_selected %> >DevOps</option>
+    <option value="Code" <%= @code_selected %> >Code</option>
+    <option value="CMS" <%= @cms_selected %> >CMS</option>
   </select>
   <br>
   <input type="submit" value="Start" style='height:40px;width:100%;'>
