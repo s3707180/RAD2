@@ -28,6 +28,17 @@
     <option value="CMS" <%= @cms_selected %> >CMS</option>
   </select>
   <br>
+  <br>
+  <br>
+  <br>
+  <label for="difficulty">Choose the Category:</label>
+  <br>
+  <select name="difficulty" id="difficulty" style='height:40px;width:100px;'>
+    <option value="Easy" <%= @easy_selected %> >Easy</option>
+    <option value="Medium" <%= @medium_selected %> >Medium</option>
+    <option value="Hard" <%= @hard_selected %> >Hard</option>
+  </select>
+  <br>
   <input type="submit" value="Start" style='height:40px;width:100%;'>
 </form>
 </div>

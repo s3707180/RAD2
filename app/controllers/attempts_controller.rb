@@ -76,6 +76,7 @@ class AttemptsController < ApplicationController
     puts "session[:session_id]: #{session[:session_id]}"
     puts "session[:requested_number_of_questions]: #{session[:requested_number_of_questions]}"
     puts "session[:category]: #{session[:category]}"
+    puts "session[:difficulty]: #{session[:difficulty]}"
     
     puts "session.id: #{session.id}"
     sessionId = session.id.to_s
@@ -106,9 +107,15 @@ class AttemptsController < ApplicationController
       session[:requested_number_of_questions] = 4
     end
 
+
     if (!session[:category])
       puts "******** Error, session[:category] was not set, fall back to linux"
       session[:category] = "Code"
+    end
+    
+    if (!session[:difficulty])
+      puts "******** Error, session[:difficulty] was not set, fall back to linux"
+      session[:difficulty] = "Easy"
     end
     
     if (!@@sessionsQuestions)
@@ -128,7 +135,7 @@ class AttemptsController < ApplicationController
         puts "00000000000000000000000000000000000000000000000000000000"
         
         # request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA"
-        request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA&limit=#{session[:requested_number_of_questions]}&category=#{session[:category]}&difficulty=easy"
+        request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA&limit=#{session[:requested_number_of_questions]}&category=#{session[:category]}&difficulty=#{session[:difficulty]}"
         puts "request_uri: #{request_uri}"
         buffer = URI.open(request_uri).read
 
@@ -202,12 +209,13 @@ class AttemptsController < ApplicationController
     puts "session[:correct_answers]: #{session[:correct_answers]}"
 
 
+
     # if the quiz is complete
     if (session[:current_question_index] >= session[:requested_number_of_questions])
       session[:test_complete] = true
       session[:total_questions] = session[:current_question_index]
       session[:current_question_index] = nil
-      redirect_to action: "result", notice: "Showing Result."
+      redirect_to action: "result"
       return
     end
 
@@ -256,8 +264,11 @@ class AttemptsController < ApplicationController
 
     category = params[:category]
     puts "category: #{category}"
+    
+    difficulty = params[:difficulty]
+    puts "difficulty: #{difficulty}"
 
-    if (questionNumbers || category)
+    if (questionNumbers || category || difficulty)
       number_of_questions = questionNumbers.to_i
       puts "number_of_questions: #{number_of_questions}"
       if number_of_questions < 4 || number_of_questions > 8
@@ -265,6 +276,8 @@ class AttemptsController < ApplicationController
       end
       session[:requested_number_of_questions] = number_of_questions
       session[:category] = category
+      session[:difficulty] = difficulty
+      
       redirect_to action: "quiz"
       return
     end
@@ -272,6 +285,7 @@ class AttemptsController < ApplicationController
     # preset value
     @numPreset = session[:requested_number_of_questions]
     @catPreset = session[:category]
+    @defPreset = session[:difficulty]
     
     @linux_selected = ""
     @devOps_selected = ""
@@ -305,6 +319,18 @@ class AttemptsController < ApplicationController
     elsif (@numPreset == 8)
       @selected_8 = "selected"
     end
+    
+    @easy_selected = ""
+    @medium_selected = ""
+    @hard_selected = ""
+
+    if (@defPreset == "Easy")
+      @easy_selected = "selected"
+    elsif (@defPreset == "Medium")
+      @medium_selected = "selected"
+    elsif (@defPreset == "Hard")
+      @hard_selected = "selected"
+    end
 
   end
 
@@ -316,8 +342,10 @@ class AttemptsController < ApplicationController
       session[:current_question_index] = nil;
       session[:category] = nil;
       session[:requested_number_of_questions] = nil
+      session[:difficulty] = nil
       
       if @@sessionsQuestions
+        sessionId = session.id.to_s
         @@sessionsQuestions[sessionId] = nil;
       end
       
