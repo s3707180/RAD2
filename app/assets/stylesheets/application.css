@@ -29,6 +29,9 @@
   margin: 0px;
 }
 
+#notice {
+  color: red;
+}
 
 #open-side-bar {
   font-size: 60px;

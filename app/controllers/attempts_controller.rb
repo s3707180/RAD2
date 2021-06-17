@@ -61,6 +61,8 @@ class AttemptsController < ApplicationController
     puts '------------- quiz start -----------'
     puts '------------------------------------'
 
+    flash.notice = nil
+
     puts "params: #{params}"
     puts "session: #{session}"
     
@@ -75,9 +77,9 @@ class AttemptsController < ApplicationController
 
     if session[:test_complete]
       session[:test_complete] = false
-      session[:total_questions] = 0
-      session[:correct_answers] = 0
-      session[:current_question_index] = 0;
+      session[:total_questions] = nil
+      session[:correct_answers] = nil
+      session[:current_question_index] = nil;
     end
     
 
@@ -123,6 +125,7 @@ class AttemptsController < ApplicationController
           if (!params[:answer] || params[:answer] == nil || params[:answer] == "" )
             # answer is not acceptable
             puts '***** answer is not acceptable'
+            flash.notice = 'The provided answer is not acceptable. Please try again and select the answer(s)'
           else
             @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
 
@@ -150,6 +153,7 @@ class AttemptsController < ApplicationController
     puts "session[:correct_answers]: #{session[:correct_answers]}"
 
 
+    # if the quiz is complete
     if (session[:current_question_index] >= TOTAL_QUESTIONS)
       session[:test_complete] = true
       session[:total_questions] = session[:current_question_index]
@@ -177,6 +181,13 @@ class AttemptsController < ApplicationController
     return correctAnswers[answer+'_correct'] == "true"
   end
 
+
+  # GET /attempts/start
+  def start
+    @questionNumbers = params[:questions]
+    redirect_to action: "quiz", notice: "quesions"
+  end
+  
   # GET /attempts/1/edit
   def edit
   end
