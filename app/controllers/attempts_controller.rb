@@ -108,6 +108,8 @@ class AttemptsController < ApplicationController
     end
 
 
+
+
     if (!session[:category])
       puts "******** Error, session[:category] was not set, fall back to linux"
       session[:category] = "Code"
@@ -160,7 +162,20 @@ class AttemptsController < ApplicationController
 
       puts "22222222222222 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
       
-      saveToDatabase(sessionId, @@sessionsQuestions[sessionId])
+      begin
+        saveToDatabase(sessionId, @@sessionsQuestions[sessionId])
+      rescue Exception => exc
+        msg = "There was an error during saving the questions to the database"
+        puts "******** error" + msg
+        logger.error(msg)
+      end
+      if (session[:requested_number_of_questions] > @@sessionsQuestions[sessionId].size) 
+        msg = "Requested # questions \"#{session[:requested_number_of_questions]}\" is more than available questions for this category and difficulty \"#{@@sessionsQuestions[sessionId].size}\". Number of questions adjusted accordingly"
+        flash.notice = msg
+        puts "******** error" + msg
+        logger.error(msg)
+        session[:requested_number_of_questions] = @@sessionsQuestions[sessionId].size
+      end
     end
     
     # puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
@@ -170,7 +185,6 @@ class AttemptsController < ApplicationController
     if (!session[:correct_answers])
       session[:correct_answers] = 0
     end
-
 
 
     # if a quesion is answered
