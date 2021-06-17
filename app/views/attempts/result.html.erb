@@ -12,9 +12,14 @@
     <% for result in @preResults.reverse do %>
       <%= result %> <br>
     <% end %>
-      
+    <br>
+
     <%= form_with url: "/attempts/start", method: :get do |form| %>
       <%= form.submit "Reload", style:'height:40px;width:100%;' %>
+      <br>
+      <br>
+      <br>
+      <%= form.submit "Redo", style:'height:40px;width:100%;' %>
     <% end %>
 
 </div>

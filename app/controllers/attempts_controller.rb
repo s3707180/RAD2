@@ -27,7 +27,8 @@ class AttemptsController < ApplicationController
     puts '-----------------------------'
     puts '------------- result -----------'
     puts '-----------------------------'
-
+    puts "params: #{params}"
+    
     puts "session[:total_questions]: #{session[:total_questions]}"
     puts "session[:correct_answers]: #{session[:correct_answers]}"
     puts " session[:previous_results]: #{ session[:previous_results]}"
@@ -44,13 +45,17 @@ class AttemptsController < ApplicationController
     # @preResults = session[:previous_results].split('|')
     @preResults = session[:previous_results]
     
-    if (session[:previous_results].size >=5)
-      session[:previous_results] = session[:previous_results][1,4]
+    #only update if it's from quiz page
+    if session[:fromquiz]
+      session[:fromquiz] = nil
+      if (session[:previous_results].size >=5)
+        session[:previous_results] = session[:previous_results][1,4]
+      end
+      
+      session[:previous_results] << 'At ' + Time.now.getlocal('+10:00').strftime("%I%P %d-%m-%y") + ', ' + @message
     end
     
-    session[:previous_results] << 'At ' + Time.now.getlocal('+10:00').strftime("%I%P %d-%m-%y %z") + ', ' + @message
-    
-    puts " session[:previous_results]: #{ session[:previous_results]}"
+    puts "updated session[:previous_results]: #{ session[:previous_results]}"
     puts Time.now.strftime("%H%P %d-%m-%Y")
 
   end
@@ -87,6 +92,7 @@ class AttemptsController < ApplicationController
       session[:total_questions] = nil
       session[:correct_answers] = nil
       session[:current_question_index] = nil;
+      session[:fromquiz] = nil
       # session[:category] = nil;
       
       if @@sessionsQuestions
@@ -229,6 +235,7 @@ class AttemptsController < ApplicationController
       session[:test_complete] = true
       session[:total_questions] = session[:current_question_index]
       session[:current_question_index] = nil
+      session[:fromquiz] = true
       redirect_to action: "result"
       return
     end
@@ -357,6 +364,7 @@ class AttemptsController < ApplicationController
       session[:category] = nil;
       session[:requested_number_of_questions] = nil
       session[:difficulty] = nil
+      session[:fromquiz] = nil
       
       if @@sessionsQuestions
         sessionId = session.id.to_s
