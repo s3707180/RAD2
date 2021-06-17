@@ -1,0 +1,17 @@
+<h1>Quiz Result</h1>
+
+<%#= render 'form', attempt: @attempt %>
+
+<div class="quiz">
+
+    <h3>
+      You answered <%= @correctAnswers %>/<%= @totalQuestions %> questions correctly
+    </h3>
+    <hr>
+
+      
+    <%= form_with url: "/attempts/quiz", method: :get do |form| %>
+      <%= form.submit "Reload", style:'height:40px;width:100%;' %>
+    <% end %>
+
+</div>

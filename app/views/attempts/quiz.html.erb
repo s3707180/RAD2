@@ -10,19 +10,18 @@
     <hr>
 
       
-    <%= form_with url: "quiz", method: :get do |form| %>
+    <%= form_with url: "/attempts/quiz", method: :get do |form| %>
       <% 
         answers = @currentQuestion['answers']
         answers.each do |key, value| 
           if value then %>
               <div class="checkboxes">
-                <%= form.radio_button :answer, value %> 
+                <%= form.radio_button :answer, key %> 
                 <%= form.label :autolyse, value, :value => value  %>
                 
               </div>
         <% end %>
-  
-  
+
       <% end %>
       <%= form.submit "Submit", style:'height:40px;width:100%;' %>
     <% end %>

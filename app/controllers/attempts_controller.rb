@@ -18,33 +18,125 @@ class AttemptsController < ApplicationController
     @attempt = Attempt.new
   end
 
-
-
-
-  # GET /attempts/quiz ----------------------
-  def quiz
+  # GET /attempts/result
+  def result
     puts '-----------------------------'
-    puts '-------------quiz -----------'
+    puts '------------- result -----------'
     puts '-----------------------------'
-    
-    quizFile = File.read('quiz.json')
-    @quizSource = JSON.parse(quizFile)
 
+    puts "session[:total_questions]: #{session[:total_questions]}"
+    puts "session[:correct_answers]: #{session[:correct_answers]}"
     
-    #if this is a new session
-    if (!session[:current_question])
-      session[:current_question_index] = 0;
-    end
-
-    @currentQuestion = @quizSource[session[:current_question_index]]
+    @totalQuestions = session[:total_questions]
+    @correctAnswers = session[:correct_answers]
     
   end
 
+  TOTAL_QUESTIONS = 4
+  @@quizSource = nil
+  # GET /attempts/quiz ----------------------
+  def quiz
+    puts '------------------------------------'
+    puts '------------- quiz start -----------'
+    puts '------------------------------------'
+
+    puts "params: #{params}"
+    puts "session: #{session}"
+    
+    puts "session[:current_question_index]: #{session[:current_question_index]}"
+    puts "session[:total_questions]: #{session[:total_questions]}"
+    puts "session[:correct_answers]: #{session[:correct_answers]}"
+    puts '-----------------------------'
+
+
+    if session[:test_complete]
+      session[:test_complete] = false
+      session[:total_questions] = 0
+      session[:correct_answers] = 0
+    end
+
+
+    # load the questions if not done so already
+    if (!@@quizSource)
+        quizFile = File.read('quiz.json')
+        @@quizSource = JSON.parse(quizFile)
+        puts @@quizSource
+    end    
+
+    #if this is a new session and no question in the session
+
+    if (!session[:current_question_index])
+      session[:current_question_index] = rand(@@quizSource.size);
+    end
+
+    
+    if (!session[:total_questions])
+      session[:total_questions] = 0
+    end
+
+    if (!session[:correct_answers])
+      session[:correct_answers] = 0
+    end
 
 
 
+    # if a quesion is answered
+    if (params[:commit])
+        puts '--  answer --'
+        if (params[:commit] == 'Submit')
+          puts '--  answer submitted  --'
+          if (!params[:answer] || params[:answer] == nil || params[:answer] == "" )
+            # answer is not acceptable
+            puts '***** answer is not acceptable'
+          else
+            @currentQuestion = @@quizSource[session[:current_question_index]]
+
+            answer = params[:answer]
+            puts "3333333333333333333"
+            puts "answer::#{answer}"
+            puts "params[:answer]:: #{params[:answer]}"
+            
+            result = isCorrectAnswer(@currentQuestion, answer)
+            puts "result: #{result}"
+            
+            if result == true
+              # puts "session[:correct_answers]: #{session[:correct_answers]}"
+              session[:correct_answers] += 1;
+            end
+            session[:total_questions] += 1;
+            
+            #select a new question
+            session[:current_question_index] = rand(@@quizSource.size);
+          end
+        end
+    end
+    
+    
+    puts '----------------quiz end debug --------------------'
+    puts "session[:total_questions]: #{session[:total_questions]}"
+    puts "session[:correct_answers]: #{session[:correct_answers]}"
 
 
+    if (session[:total_questions] >= TOTAL_QUESTIONS)
+      session[:test_complete] = true
+      redirect_to action: "result", notice: "Showing Result."
+      return
+    end
+
+    @currentQuestion = @@quizSource[session[:current_question_index]]
+  end
+
+  def isCorrectAnswer(question, answer)
+    puts '999999999999999999999999999'
+    puts "question['correct_answers']: #{question['correct_answers']}"
+    puts "answer: #{answer}"
+    
+    correctAnswers = question['correct_answers']
+    
+    puts "correctAnswers[answer+'_correct']: #{correctAnswers[answer+'_correct']}"
+    
+    return correctAnswers[answer+'_correct'] == "true"
+  end
 
   # GET /attempts/1/edit
   def edit

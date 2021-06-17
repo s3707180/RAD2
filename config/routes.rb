@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/' => 'attempts#quiz'
   get 'attempts/quiz'
+  get 'attempts/result'
 
   # resources :attempts
   
