@@ -95,8 +95,13 @@ class AttemptsController < ApplicationController
       session[:fromquiz] = nil
       # session[:category] = nil;
       
-      if @@sessionsQuestions
-        @@sessionsQuestions[sessionId] = nil;
+      # only reset the questions if the 
+      if params[:commit] != "Redo"
+        if @@sessionsQuestions
+          @@sessionsQuestions[sessionId] = nil;
+        end
+      else
+        puts "this is Redo so not loading the questions again"
       end
       
     end
