@@ -1,4 +1,8 @@
   require 'json'
+  require 'open-uri'
+  require 'net/https'
+  require 'uri'
+  require 'rest-client'
 
 class AttemptsController < ApplicationController
   before_action :set_attempt, only: %i[ show edit update destroy ]
@@ -70,6 +74,9 @@ class AttemptsController < ApplicationController
     puts "session[:correct_answers]: #{session[:correct_answers]}"
     puts "request.session_options[:id]: #{request.session_options[:id]}"
     puts "session[:session_id]: #{session[:session_id]}"
+    puts "session[:requested_number_of_questions]: #{session[:requested_number_of_questions]}"
+    puts "session[:category]: #{session[:category]}"
+    
     puts "session.id: #{session.id}"
     sessionId = session.id.to_s
     puts '-----------------------------'
@@ -79,15 +86,14 @@ class AttemptsController < ApplicationController
       session[:total_questions] = nil
       session[:correct_answers] = nil
       session[:current_question_index] = nil;
+      session[:category] = nil;
+      
+      if @@sessionsQuestions
+        @@sessionsQuestions[sessionId] = nil;
+      end
+      
     end
     
-
-    # load the questions if not done so already
-    if (!@@quizSource)
-        quizFile = File.read('quiz.json')
-        @@quizSource = JSON.parse(quizFile)
-        puts @@quizSource
-    end    
 
     #if this is a new session and no question in the session
 
@@ -99,20 +105,58 @@ class AttemptsController < ApplicationController
       puts "******** Error, session[:requested_number_of_questions] was not set"
       session[:requested_number_of_questions] = 4
     end
+
+    if (!session[:category])
+      puts "******** Error, session[:category] was not set, fall back to linux"
+      session[:category] = "Code"
+    end
     
     if (!@@sessionsQuestions)
       @@sessionsQuestions = Hash.new
     end
       
-    puts "111111111 @@sessionsQuestions: #{@@sessionsQuestions}"
-    puts "111111111 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+    # puts "111111111 @@sessionsQuestions: #{@@sessionsQuestions}"
+    # puts "111111111 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
     
+    
+    # load the questions for this session and round
     if  !@@sessionsQuestions[sessionId]
-      @@sessionsQuestions[sessionId] = @@quizSource.shuffle[0, session[:requested_number_of_questions]]
+          
+    
+      begin
+        puts "00000000000000000000000000000000000000000000000000000000"
+        puts "00000000000000000000000000000000000000000000000000000000"
+        puts "00000000000000000000000000000000000000000000000000000000"
+        
+        # request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA"
+        request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA&limit=#{session[:requested_number_of_questions]}&category=#{session[:category]}&difficulty=easy"
+        buffer = URI.open(request_uri).read
+
+        puts "00000000000000000000000000000000000000000000000000000000"
+        @@sessionsQuestions[sessionId] = JSON.parse(buffer)
+        puts @@sessionsQuestions[sessionId]
+        puts "00000000000000000000000000000000000000000000000000000000"
+        puts "00000000000000000000000000000000000000000000000000000000"
+        puts "00000000000000000000000000000000000000000000000000000000"
+        puts "00000000000000000000000000000000000000000000000000000000"
+        
+      rescue Exception => exc
+         logger.error("Message for the log file #{exc.message}")
+         flash[:notice] = "Error reading from API, falling back to local quizes"
+  
+        # load the questions if not done so already
+        if (!@@quizSource)
+            quizFile = File.read('quiz.json')
+            @@quizSource = JSON.parse(quizFile)
+            puts @@quizSource
+        end
+        @@sessionsQuestions[sessionId] = @@quizSource.shuffle[0, session[:requested_number_of_questions]]
+      end
+
       puts "22222222222222 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
     end
     
-    puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+    # puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
     puts "333333333333 @@sessionsQuestions[sessionId].size: #{@@sessionsQuestions[sessionId].size}"
 
 
@@ -169,8 +213,8 @@ class AttemptsController < ApplicationController
 
      @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
      
-     puts "44444444 @currentQuestion: #{@currentQuestion}, #{session[:current_question_index]}"
-     puts "555555555 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}, size: #{@@sessionsQuestions[sessionId].size}"
+    # puts "44444444 @currentQuestion: #{@currentQuestion}, #{session[:current_question_index]}"
+    puts "555555555 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}, size: #{@@sessionsQuestions[sessionId].size}"
   end
 
 
@@ -194,15 +238,36 @@ class AttemptsController < ApplicationController
     puts '------------------------------------'
     questionNumbers = params[:questionNumbers]
     puts "questionNumbers: #{questionNumbers}"
-    if (questionNumbers)
+
+    category = params[:category]
+    puts "category: #{category}"
+
+    if (questionNumbers || category)
       number_of_questions = questionNumbers.to_i
       puts "number_of_questions: #{number_of_questions}"
-      if number_of_questions < 4 || number_of_questions > 8 
+      if number_of_questions < 4 || number_of_questions > 8
         flash.notice = "The provided value for number of questions is not acceptable"
       end
       session[:requested_number_of_questions] = number_of_questions
+      session[:category] = category
       redirect_to action: "quiz"
     end
+  end
+  
+    # GET /attempts/clean
+  def clean
+      session[:test_complete] = false
+      session[:total_questions] = nil
+      session[:correct_answers] = nil
+      session[:current_question_index] = nil;
+      session[:category] = nil;
+      session[:requested_number_of_questions] = nil
+      
+      if @@sessionsQuestions
+        @@sessionsQuestions[sessionId] = nil;
+      end
+      
+      redirect_to action: "start"
   end
   
   # GET /attempts/1/edit
