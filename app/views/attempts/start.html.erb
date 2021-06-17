@@ -1,9 +1,18 @@
-<h1>Quiz Attempt</h1>
+<h1>Quiz Start</h1>
 
 <H4 id="notice"><%= notice %></H4>
 
 <div class="quiz">
 
-
-
+<form action="/attempts/start" method="get">
+  <label for="questionNumbers">Choose the number of Questions:</label>
+  <select name="questionNumbers" id="questionNumbers" style='height:40px;width:50px;'>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+  </select>
+  <input type="submit" value="Start" style='height:40px;width:100%;'>
+</form>
 </div>

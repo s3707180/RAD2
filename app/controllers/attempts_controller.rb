@@ -51,7 +51,6 @@ class AttemptsController < ApplicationController
 
   end
 
-  TOTAL_QUESTIONS = 4
   @@quizSource = nil
   @@sessionsQuestions = nil
   
@@ -96,6 +95,11 @@ class AttemptsController < ApplicationController
       session[:current_question_index] = 0
     end
     
+    if (!session[:requested_number_of_questions])
+      puts "******** Error, session[:requested_number_of_questions] was not set"
+      session[:requested_number_of_questions] = 4
+    end
+    
     if (!@@sessionsQuestions)
       @@sessionsQuestions = Hash.new
     end
@@ -104,11 +108,12 @@ class AttemptsController < ApplicationController
     puts "111111111 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
     
     if  !@@sessionsQuestions[sessionId]
-      @@sessionsQuestions[sessionId] = @@quizSource.shuffle[0,TOTAL_QUESTIONS]
+      @@sessionsQuestions[sessionId] = @@quizSource.shuffle[0, session[:requested_number_of_questions]]
       puts "22222222222222 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
     end
     
     puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+    puts "333333333333 @@sessionsQuestions[sessionId].size: #{@@sessionsQuestions[sessionId].size}"
 
 
     if (!session[:correct_answers])
@@ -154,7 +159,7 @@ class AttemptsController < ApplicationController
 
 
     # if the quiz is complete
-    if (session[:current_question_index] >= TOTAL_QUESTIONS)
+    if (session[:current_question_index] >= session[:requested_number_of_questions])
       session[:test_complete] = true
       session[:total_questions] = session[:current_question_index]
       session[:current_question_index] = nil
@@ -184,8 +189,20 @@ class AttemptsController < ApplicationController
 
   # GET /attempts/start
   def start
-    @questionNumbers = params[:questions]
-    redirect_to action: "quiz", notice: "quesions"
+    puts '------------------------------------'
+    puts '------------- start start -----------'
+    puts '------------------------------------'
+    questionNumbers = params[:questionNumbers]
+    puts "questionNumbers: #{questionNumbers}"
+    if (questionNumbers)
+      number_of_questions = questionNumbers.to_i
+      puts "number_of_questions: #{number_of_questions}"
+      if number_of_questions < 4 || number_of_questions > 8 
+        flash.notice = "The provided value for number of questions is not acceptable"
+      end
+      session[:requested_number_of_questions] = number_of_questions
+      redirect_to action: "quiz"
+    end
   end
   
   # GET /attempts/1/edit
