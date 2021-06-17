@@ -10,7 +10,7 @@
     <hr>
 
       
-    <%= form_with url: "/attempts/quiz", method: :get do |form| %>
+    <%= form_with url: "/attempts/quiz", method: :post do |form| %>
       <% 
         answers = @currentQuestion['answers']
         answers.each do |key, value| 

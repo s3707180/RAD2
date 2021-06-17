@@ -106,7 +106,6 @@ class AttemptsController < ApplicationController
     #if this is a new session and no question in the session
 
     if (!session[:current_question_index])
-      # session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
       session[:current_question_index] = 0
     end
     
@@ -140,7 +139,6 @@ class AttemptsController < ApplicationController
             # answer is not acceptable
             puts '***** answer is not acceptable'
           else
-            # @currentQuestion = @@quizSource[session[:current_question_index]]
             @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
 
             answer = params[:answer]
@@ -157,8 +155,6 @@ class AttemptsController < ApplicationController
             end
             session[:current_question_index] += 1;
             
-            #select a new question
-            # session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
           end
         end
     end
@@ -177,18 +173,13 @@ class AttemptsController < ApplicationController
       return
     end
 
-    # @currentQuestion = @@quizSource[session[:current_question_index]]
      @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
      
      puts "44444444 @currentQuestion: #{@currentQuestion}, #{session[:current_question_index]}"
      puts "555555555 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}, size: #{@@sessionsQuestions[sessionId].size}"
   end
 
-  def getRandomeQuestion size
-    rand(size)
-  end
-  
-  
+
   def isCorrectAnswer(question, answer)
     puts '999999999999999999999999999'
     puts "question['correct_answers']: #{question['correct_answers']}"
