@@ -12,12 +12,16 @@
 
       
     <%= form_with url: "/attempts/quiz", method: :post do |form| %>
-      <% 
-        answers = @currentQuestion['answers']
-        answers.each do |key, value| 
+      <% answers = @currentQuestion['answers'] %>
+        
+      <% answers.each do |key, value| 
           if value then %>
               <div class="checkboxes">
-                <%= form.radio_button :answer, key %> 
+                <% if !@isMultipleChoice %>
+                  <%= form.radio_button :answer, key %> 
+                <% else %>
+                  <%= form.check_box :answer %> 
+                <% end %>
                 <%= form.label :autolyse, value, :value => value  %>
                 
               </div>

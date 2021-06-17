@@ -97,13 +97,15 @@ class AttemptsController < ApplicationController
       
       # only reset the questions if the 
       if params[:commit] != "Redo"
+        puts "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL this is NNNNOOOOTTTTT Redo"
         if @@sessionsQuestions
           @@sessionsQuestions[sessionId] = nil;
         end
       else
-        puts "this is Redo so not loading the questions again"
+        puts "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL this is Redo"
       end
       
+
     end
     
 
@@ -249,8 +251,23 @@ class AttemptsController < ApplicationController
      
     # puts "44444444 @currentQuestion: #{@currentQuestion}, #{session[:current_question_index]}"
     puts "555555555 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}, size: #{@@sessionsQuestions[sessionId].size}"
+    
+    @isMultipleChoice = isMultipleChoice(@currentQuestion)
   end
 
+  def isMultipleChoice(question) 
+    correctAnswers = question['correct_answers']
+    
+    countTrue = 0
+    correctAnswers.each do |key, answer| 
+      puts "------------------- answer: #{answer}"
+      if (answer == "true")
+        countTrue += 1;
+      end
+    end
+
+    countTrue > 1
+  end
 
   def isCorrectAnswer(question, answer)
     puts '999999999999999999999999999'
