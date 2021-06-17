@@ -85,7 +85,7 @@ class AttemptsController < ApplicationController
     #if this is a new session and no question in the session
 
     if (!session[:current_question_index])
-      session[:current_question_index] = rand(@@quizSource.size);
+      session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
     end
 
     
@@ -125,7 +125,7 @@ class AttemptsController < ApplicationController
             session[:total_questions] += 1;
             
             #select a new question
-            session[:current_question_index] = rand(@@quizSource.size);
+            session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
           end
         end
     end
@@ -145,6 +145,11 @@ class AttemptsController < ApplicationController
     @currentQuestion = @@quizSource[session[:current_question_index]]
   end
 
+  def getRandomeQuestion size
+    rand(size)
+  end
+  
+  
   def isCorrectAnswer(question, answer)
     puts '999999999999999999999999999'
     puts "question['correct_answers']: #{question['correct_answers']}"
