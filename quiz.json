@@ -1,0 +1,642 @@
+[
+   {
+      "id":987,
+      "question":"What is the correct way to write a JavaScript array?",
+      "description":null,
+      "answers":{
+         "answer_a":"var colors = 1 = (\"red\"), 2 = (\"green\"), 3 = (\"blue\")",
+         "answer_b":"var colors = \"red\", \"green\", \"blue\"",
+         "answer_c":"var colors = [\"red\", \"green\", \"blue\"]",
+         "answer_d":"var colors = (1:\"red\", 2:\"green\", 3:\"blue\")",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"true",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"JavaScript"
+         }
+      ],
+      "category":"Code",
+      "difficulty":"Easy"
+   },
+   {
+      "id":682,
+      "question":"Expand JFS in context of file system?",
+      "description":null,
+      "answers":{
+         "answer_a":"Journal File System",
+         "answer_b":"Journal Failing System",
+         "answer_c":"Journal File Service",
+         "answer_d":"Journal Failing Service",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":null,
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"BASH"
+         }
+      ],
+      "category":"Linux",
+      "difficulty":"Easy"
+   },
+   {
+      "id":114,
+      "question":"Which of the following is NOT a magic predefined constant?",
+      "description":null,
+      "answers":{
+         "answer_a":"__LINE__",
+         "answer_b":"__FILE__",
+         "answer_c":"__DATE__",
+         "answer_d":"__CLASS__",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"true",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_c",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"PHP"
+         }
+      ],
+      "category":"",
+      "difficulty":"Medium"
+   },
+   {
+      "id":915,
+      "question":"What are the responsibilities of a node controller?",
+      "description":null,
+      "answers":{
+         "answer_a":"To assign a CIDR block to the nodes",
+         "answer_b":"To monitor the health of the nodes",
+         "answer_c":"To maintain the list of nodes",
+         "answer_d":"All of the mentioned",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"true",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":null,
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Kubernetes"
+         }
+      ],
+      "category":"DevOps",
+      "difficulty":"Easy"
+   },
+   {
+      "id":140,
+      "question":"What is the correct HTML for making a text area?",
+      "description":null,
+      "answers":{
+         "answer_a":"<input type=\"textbox\">",
+         "answer_b":"<textarea>",
+         "answer_c":"<input type=\"textarea\">",
+         "answer_d":"<textbox>",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"true",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_b",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"HTML"
+         }
+      ],
+      "category":"",
+      "difficulty":"Easy"
+   },
+   {
+      "id":25,
+      "question":"What are the most common Linux boot managers?",
+      "description":null,
+      "answers":{
+         "answer_a":"Bootmanager\/Bootflag",
+         "answer_b":"Bootmand\/MBR",
+         "answer_c":"LILO\/GRUB",
+         "answer_d":"Bootd\/init.d",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"true",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_c",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Linux"
+         }
+      ],
+      "category":"Linux",
+      "difficulty":"Hard"
+   },
+   {
+      "id":732,
+      "question":"How to check the history of deployments including the revision in Kubernetes?",
+      "description":null,
+      "answers":{
+         "answer_a":"kubectl rollout history deployment\/frontend",
+         "answer_b":"kubectl rollout log deployment\/frontend",
+         "answer_c":"kubectl rollout show deployment\/frontend",
+         "answer_d":"kubectl rollout diff deployment\/frontend",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Kubernetes"
+         }
+      ],
+      "category":"Linux",
+      "difficulty":"Medium"
+   },
+   {
+      "id":294,
+      "question":"What is a permalink?",
+      "description":null,
+      "answers":{
+         "answer_a":"A popular WordPress Plugin",
+         "answer_b":"The numeric IP address of your WordPress site",
+         "answer_c":"The complete URL of your WordPress site",
+         "answer_d":"Permalinks are the permanent URLs to your individual pages and blog posts, as well as your category and tag archives",
+         "answer_e":"A permalink is the web address used to link to your content.",
+         "answer_f":null
+      },
+      "multiple_correct_answers":"true",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"true",
+         "answer_e_correct":"true",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"WordPress"
+         }
+      ],
+      "category":"CMS",
+      "difficulty":"Easy"
+   },
+   {
+      "id":1042,
+      "question":"Ansible is an open-source agentless automation tool that enables you to easily configure and deploy systems.",
+      "description":null,
+      "answers":{
+         "answer_a":"true",
+         "answer_b":"false",
+         "answer_c":null,
+         "answer_d":null,
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"DevOps"
+         }
+      ],
+      "category":"DevOps",
+      "difficulty":"Easy"
+   },
+   {
+      "id":648,
+      "question":"Which command can be used to determine file type by its content?",
+      "description":null,
+      "answers":{
+         "answer_a":"file",
+         "answer_b":"ls \u2013l",
+         "answer_c":"type",
+         "answer_d":"None of the above.",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"BASH"
+         }
+      ],
+      "category":"Linux",
+      "difficulty":"Easy"
+   },
+   {
+      "id":291,
+      "question":"Which relational database does WordPress use?",
+      "description":null,
+      "answers":{
+         "answer_a":"Oracle",
+         "answer_b":"MySQL",
+         "answer_c":"PostgresSQL",
+         "answer_d":"MSSQL SERVER",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"true",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"WordPress"
+         }
+      ],
+      "category":"CMS",
+      "difficulty":"Easy"
+   },
+   {
+      "id":1018,
+      "question":"Which Process Validates And Configures Data For The Api Objects Like Pods, Services?",
+      "description":null,
+      "answers":{
+         "answer_a":"kube-apiserver process validates and configures data for the api objects.",
+         "answer_b":"kube-apiserver process validates and configures data for the gui objects.",
+         "answer_c":"kube-apiserver process validates and configures data for the cli objects.",
+         "answer_d":null,
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":null,
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Kubernetes"
+         }
+      ],
+      "category":"DevOps",
+      "difficulty":"Easy"
+   },
+   {
+      "id":175,
+      "question":"What is Docker Swarm?",
+      "description":null,
+      "answers":{
+         "answer_a":"Container orchestration tool",
+         "answer_b":"Container registry",
+         "answer_c":"Text document that contains all the commands",
+         "answer_d":null,
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Docker"
+         }
+      ],
+      "category":"Docker",
+      "difficulty":"Easy"
+   },
+   {
+      "id":926,
+      "question":"What is a Headless Service?",
+      "description":null,
+      "answers":{
+         "answer_a":"Headless Service is similar to that of a \u2018Normal\u2019 services but does not have a Cluster IP.",
+         "answer_b":"Headless Service is similar to that of a \u2018Normal\u2019 services but has a Cluster IP.",
+         "answer_c":null,
+         "answer_d":null,
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":null,
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"Kubernetes"
+         }
+      ],
+      "category":"DevOps",
+      "difficulty":"Medium"
+   },
+   {
+      "id":499,
+      "question":"Which of the following attribute triggers event when the length of the media is changed?",
+      "description":null,
+      "answers":{
+         "answer_a":"ondrop",
+         "answer_b":"onended",
+         "answer_c":"onemptied",
+         "answer_d":"ondurationchange",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"true",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"HTML"
+         }
+      ],
+      "category":"Code",
+      "difficulty":"Medium"
+   },
+   {
+      "id":432,
+      "question":"Referential integrity is directly related to",
+      "description":null,
+      "answers":{
+         "answer_a":"Relation Key",
+         "answer_b":"Foreign Key",
+         "answer_c":"Unique Key",
+         "answer_d":"Primary Key",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"true",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"MySQL"
+         }
+      ],
+      "category":"SQL",
+      "difficulty":"Medium"
+   },
+   {
+      "id":148,
+      "question":"Which doctype is correct for HTML5?",
+      "description":null,
+      "answers":{
+         "answer_a":"<!DOCTYPE HTML5>",
+         "answer_b":"<!DOCTYPE HTML PUBLIC>",
+         "answer_c":"<!DOCTYPE html>",
+         "answer_d":"<HTML5>",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"false",
+         "answer_c_correct":"true",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_c",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"HTML"
+         }
+      ],
+      "category":"",
+      "difficulty":"Easy"
+   },
+   {
+      "id":507,
+      "question":"Which is not a domain name extension",
+      "description":null,
+      "answers":{
+         "answer_a":".mil",
+         "answer_b":".com",
+         "answer_c":".int",
+         "answer_d":".org",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"HTML"
+         }
+      ],
+      "category":"Code",
+      "difficulty":"Medium"
+   },
+   {
+      "id":1051,
+      "question":"Ansible playbooks are the basis for a really simple configuration management and multi-machine deployment system, unlike any that already exist, and one that is very well suited to deploying complex applications.",
+      "description":null,
+      "answers":{
+         "answer_a":"false",
+         "answer_b":"true",
+         "answer_c":null,
+         "answer_d":null,
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"false",
+         "answer_b_correct":"true",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"DevOps"
+         }
+      ],
+      "category":"DevOps",
+      "difficulty":"Easy"
+   },
+   {
+      "id":219,
+      "question":"What does SQL stands for?",
+      "description":null,
+      "answers":{
+         "answer_a":"Structure query language",
+         "answer_b":"Strong question language",
+         "answer_c":"Structured question language",
+         "answer_d":"Separate query language",
+         "answer_e":null,
+         "answer_f":null
+      },
+      "multiple_correct_answers":"false",
+      "correct_answers":{
+         "answer_a_correct":"true",
+         "answer_b_correct":"false",
+         "answer_c_correct":"false",
+         "answer_d_correct":"false",
+         "answer_e_correct":"false",
+         "answer_f_correct":"false"
+      },
+      "correct_answer":"answer_a",
+      "explanation":null,
+      "tip":null,
+      "tags":[
+         {
+            "name":"MySQL"
+         }
+      ],
+      "category":"SQL",
+      "difficulty":"Easy"
+   }
+]
