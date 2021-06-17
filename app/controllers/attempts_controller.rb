@@ -26,10 +26,29 @@ class AttemptsController < ApplicationController
 
     puts "session[:total_questions]: #{session[:total_questions]}"
     puts "session[:correct_answers]: #{session[:correct_answers]}"
+    puts " session[:previous_results]: #{ session[:previous_results]}"
     
     @totalQuestions = session[:total_questions]
     @correctAnswers = session[:correct_answers]
     
+    @message = "you answered #{@correctAnswers}/#{@totalQuestions} questions correctly"
+    
+    # session[:previous_results] = []
+    if !session[:previous_results]
+      session[:previous_results] = []
+    end
+    # @preResults = session[:previous_results].split('|')
+    @preResults = session[:previous_results]
+    
+    if (session[:previous_results].size >=5)
+      session[:previous_results] = session[:previous_results][1,4]
+    end
+    
+    session[:previous_results] << 'At ' + Time.now.getlocal('+10:00').strftime("%I%P %d-%m-%y %z") + ', ' + @message
+    
+    puts " session[:previous_results]: #{ session[:previous_results]}"
+    puts Time.now.strftime("%H%P %d-%m-%Y")
+
   end
 
   TOTAL_QUESTIONS = 4
