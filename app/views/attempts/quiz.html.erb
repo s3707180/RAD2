@@ -2,32 +2,29 @@
 
 <%#= render 'form', attempt: @attempt %>
 
+<div class="quiz">
 
+    <h3>
+    (<%= @currentQuestion['id'] %>) <%= @currentQuestion['question'] %>
+    </h3>
+    <hr>
 
-<h3>
-(<%= @currentQuestion['id'] %>) <%= @currentQuestion['question'] %>
-</h3>
-<hr>
+      
+    <%= form_with url: "quiz", method: :get do |form| %>
+      <% 
+        answers = @currentQuestion['answers']
+        answers.each do |key, value| 
+          if value then %>
+              <div class="checkboxes">
+                <%= form.radio_button :answer, value %> 
+                <%= form.label :autolyse, value, :value => value  %>
+                
+              </div>
+        <% end %>
+  
+  
+      <% end %>
+      <%= form.submit "Submit", style:'height:40px;width:100%;' %>
+    <% end %>
 
-<% @currentQuestion['answers'].size %>
-<br>
-<% @currentQuestion['answers']['answer_a'] %>
-<br>
-<% @currentQuestion['answers']['answer_b'] %>
-<br>
-
-<%= @currentQuestion['answers']['answer_f'] %>
-
-<hr>
-<% answers = @currentQuestion['answers']
-    answers.each do |key, value| 
-    if value then %>
-      <%= "Bob's #{key} is #{value}" %> <br>
-  <% end %>
-<% end %>
-
-
-<hr>
-
-
-<%= link_to 'Back', attempts_path %>
+</div>

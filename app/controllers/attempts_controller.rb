@@ -23,9 +23,15 @@ class AttemptsController < ApplicationController
 
   # GET /attempts/quiz ----------------------
   def quiz
-    @attempt = Attempt.new
+    puts '-----------------------------'
+    puts '-------------quiz -----------'
+    puts '-----------------------------'
+    
     quizFile = File.read('quiz.json')
     @quizSource = JSON.parse(quizFile)
+
+    
+    #if this is a new session
     if (!session[:current_question])
       session[:current_question_index] = 0;
     end

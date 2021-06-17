@@ -540,3 +540,22 @@ section > div {
     background-color: transparent;
 }
 
+
+.quiz label {
+  font-size: 25px;
+}
+
+.quiz .checkboxes {
+  display: flex;
+  /*justify-content: flex-start;*/
+  padding-right: 50px;
+  margin: 30px;
+}
+
+
+
+.quiz input {
+  height: 30px;
+  width: 30px;
+  margin-left: 30px;
+}
