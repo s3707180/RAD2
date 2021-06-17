@@ -13,3 +13,530 @@
  *= require_tree .
  *= require_self
  */
+#home {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    padding: 25px 0px 0px;
+}
+
+#title {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 50px;
+  line-height: normal;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+
+#open-side-bar {
+  font-size: 60px;
+  cursor: pointer;
+  background-color: aliceblue;
+  color: grey;
+  border: none;
+  border-radius: 40px;
+}
+
+#open-side-bar:hover {
+  background-color: #8080803d;
+}
+
+
+#search1 {
+    margin-left: auto;
+}
+
+
+#search {
+    background: white;
+    border: 1px solid #ccc;
+    color: black;
+    box-shadow: 2px 2px 3px #666;
+    -webkit-transition: background-color 0.5s, border-color 1s;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    height: 50px;
+    margin-left: 10px;
+    font-size: 32px;
+    width: 240px;
+}
+
+.activeLogo {
+    width:32px;
+    height:32px;
+    visibility:hidden;
+}
+
+@font-face {
+    font-family: Merienda;
+    src: url('Merienda-Regular.ttf');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Merienda;
+    src: url('Merienda-Bold.ttf');
+    font-style: normal;
+    font-weight: bold;
+}
+
+.Header {
+    width: 100%;
+    position: relative;
+    margin: 0px auto;
+    padding-top: 20px;
+    overflow: hidden;
+    background: aliceblue;
+
+}
+
+.logo {
+    background: #fffffF;
+    font-size: 12px;
+    opacity: 0.9;
+    width: 980px;
+    position: relative;
+    margin: 0px auto;
+
+    padding: 0px;
+    overflow: hidden;
+}
+
+#search:focus {
+    background-color: #faaeae;
+    border: 1px solid #f01e1e
+        /*red*/
+    ;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: aliceblue;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidebar-item {
+  padding: 30px 0px 30px 0px;
+  text-decoration: none;
+  font-size: 40px;
+  color: grey;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar h2 {
+  font-size: 50px;
+  padding: 30px 0px 20px 20px;
+}
+
+
+
+.sidebar #close-side-bar {
+  font-size: 90px;
+  background: whitesmoke;
+  display: block;
+  padding: 60px;
+  margin: 0px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+
+.cart {
+    align-self: center;
+}
+
+
+
+.PrimaryNavigation {
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    font-size: 45px;
+    padding: 20px;
+}
+
+
+.PrimaryNavigation a:link,
+.PrimaryNavigation a:hover,
+.PrimaryNavigation a:visited {
+    margin: 0px 23px;
+    color: grey;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: -webkit-pictograph;
+}
+
+.PrimaryNavigation a:hover {
+    text-shadow: 0px 2px 3px #AED6F1;
+}
+
+
+.wrapper {
+    margin-top: 50px;
+    height: 108px;
+}
+
+.footer {
+    display: flex;
+    line-height: normal;
+    background: aliceblue;
+    font-size: 40px;
+    opacity: 0.9;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: inset 0px 2px 2px 0px;
+}
+
+.footer ul {
+    list-style-type: none;
+}
+
+
+.footer-items {
+    padding: 30px;
+    width: 25%;
+}
+
+
+.bookInfo {
+    float: left;
+    display: block;
+    width: 210px;
+    margin: 0 10px 20px 15px;
+    background: #FFFFFF;
+    border: 1px solid #FBCEB1;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+}
+
+.bookInfo a:link,
+.bookInfo a:hover,
+.bookInfo a:visited {
+    color: #f01e1e
+        /*red*/
+    ;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.bookInfo a:hover {
+    text-shadow: 0px 2px 3px #555;
+    box-shadow: 1px 3px 1px #7C7C7C;
+    -webkit-box-shadow: 1px 3px 1px #7C7C7C;
+}
+
+.fullLightGreyBox {
+    background: whitesmoke;
+    /*opacity: 0.9;*/
+    border: 1px solid #FBCEB1;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: inset 1px 4px 9px -6px;
+    /*padding: 10px;*/
+    background-image: url("images/logo.png");
+    overflow: auto;
+
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+
+
+body {
+    /*background-image: url(https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);*/
+    /*background-image: url(background.jpeg);*/
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.mainContainer {
+    position: relative;
+    margin: 0px auto;
+    /*width: 980px;*/
+    margin: 0 auto;
+    padding: 0px;
+    overflow: hidden;
+
+}
+
+
+.con {
+    height:650px;
+    width: 650px;
+    border: 25px solid #484848;
+    padding: 25px;
+
+    text-align: center;
+    position: relative;
+    margin: 0px auto;
+    font-size: 23px;
+}
+
+.con button {
+    font-size: 20px;
+}
+
+h1 {
+    font-family: 'Merienda';
+    font-weight: normal;
+    color: #333;
+    text-align: center;
+    font-size: 2.2em;
+    font-variant: small-caps;
+    text-shadow: 1px 1px 0px #fff;
+    margin: 15px 0px;
+}
+
+h2 {
+    padding-top: 50px;
+    color: black;
+    font-weight: normal;
+    border-bottom: 1px solid #bbb;
+    font-size: 50px;
+    font-family: serif;
+    text-transform: uppercase;
+    text-shadow: 0px 2px 3px #555;
+    margin-bottom: 0px;
+    text-align: left;
+    padding-left: 40px;
+}
+
+h3 {
+    font-family: 'Merienda';
+    font-weight: normal;
+    font-size: 1.7em;
+    margin: 15px 20px 15px 0px;
+    text-shadow: 0px 1px 2px #555;
+    border: none;
+    color: black;
+}
+h5 {
+    font-family: 'Merienda';
+    font-weight: normal;
+    font-size: 1.7em;
+    margin: 15px 20px 15px 0px;
+    text-shadow: 0px 1px 2px #555;
+    border: none;
+    color: black;
+}
+
+.rcol p, .reviews p, p {
+    margin: 0 auto;
+    text-align: justify;
+    margin-left: 10px;
+}
+
+.rcol p {
+    padding-top: 15px;
+    width: 580px;
+    margin-left: 10px;
+}
+
+pre {
+    text-align: left;
+    padding-left: 50px;
+}
+
+.reviews p, p {
+    width: 920px;
+    /*margin-bottom: 15px;*/
+}
+
+.center-justified {
+    margin: 0 auto;
+    text-align: justify;
+    width: 30em;
+}
+
+.reviews h4 {
+    font-family: 'Merienda';
+    text-align: left;
+}
+
+h5 {
+    font-family: 'Merienda';
+    font-weight: normal;
+    text-align: left;
+    font-size: 1.7em;
+    margin: 15px 20px 15px 0px;
+    text-shadow: 0px 1px 2px #555;
+    border: none;
+    color: black;
+}
+
+
+.clear {
+    clear: both;
+}
+
+p {
+    text-align: left;
+    font-family: 'Merienda';
+}
+
+li {
+    text-align: left;
+    font-family: 'Merienda';
+    font-size: 14px;
+}
+
+section {
+    width: 980px;
+}
+
+section > div {
+    clear: both;
+}
+
+.lcol {
+    Width: 250px;
+    float: left;
+    margin: 0px 0px 0px 0px;
+}
+
+.lcol img {
+    width: 250px;
+}
+
+.rcol {
+    width: 660px;
+    float: right;
+    margin-right: 20px;
+}
+
+
+.lcol, .rocl {
+    background-color: transparent;
+}
+
+.errMsg {
+    color: red;
+    font-weight: bold;
+}
+
+
+.shopping-cart {
+    width: 700px;
+    height: 400px;
+    margin: 80px auto;
+
+    box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hed {
+    height: 600px;
+    border-bottom: 1px solid #faaeae;
+    padding: 25px 35px;
+    color: FF0000;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: Merienda;
+    src: url('Merienda-Regular.ttf');
+    font-style: normal;
+    font-weight: normal;
+   
+}
+
+.button {
+    position: relative;
+    padding-top: 30px;
+    margin-right: 60px;
+}
+
+.dele {
+    display: inline-block;
+    Cursor: pointer;
+}
+
+.dele {
+    width: 15px;
+    height: 18px;
+    background: url("delete-icn.svg") no-repeat center;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #484848;
+    border: 2px solid black;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 250px;
+    transition: all 0.1s;
+    cursor: pointer;
+    margin: 15px;
+
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -30px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-left: 30px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    left: 0;
+}
+.locl {
+    Width: 100;
+    float:center;
+    margin: 0px 0px 0px 0px;
+    
+}
+
+.loclg {
+    width: 250px;
+}
+
+
+
+.lcol {
+    background-color: transparent;
+}
+
