@@ -54,7 +54,6 @@ class AttemptsController < ApplicationController
   TOTAL_QUESTIONS = 4
   @@quizSource = nil
   @@sessionsQuestions = nil
-  @@a = nil
   
   # GET /attempts/quiz ----------------------
   def quiz
@@ -74,20 +73,6 @@ class AttemptsController < ApplicationController
     sessionId = session.id.to_s
     puts '-----------------------------'
 
-    
-    puts "11 ======================================================= @@a: #{@@a}"
-    if !@@a
-      @@a = "aaaaaaaaaaaaaaaaaa"
-      puts "22 ======================================================= @@a: #{@@a}"
-    end
-    
-    
-    
-    
-    
-    
-    
-    
     if session[:test_complete]
       session[:test_complete] = false
       session[:total_questions] = 0
