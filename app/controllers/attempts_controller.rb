@@ -126,7 +126,6 @@ class AttemptsController < ApplicationController
       begin
         puts "00000000000000000000000000000000000000000000000000000000"
         puts "00000000000000000000000000000000000000000000000000000000"
-        puts "00000000000000000000000000000000000000000000000000000000"
         
         # request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA"
         request_uri = "https://quizapi.io/api/v1/questions?apiKey=Wzm691Ny8hZsq9SKHQdoKqOt5L3a5jvqrIcW1rFA&limit=#{session[:requested_number_of_questions]}&category=#{session[:category]}&difficulty=easy"
@@ -138,9 +137,7 @@ class AttemptsController < ApplicationController
         puts @@sessionsQuestions[sessionId]
         puts "00000000000000000000000000000000000000000000000000000000"
         puts "00000000000000000000000000000000000000000000000000000000"
-        puts "00000000000000000000000000000000000000000000000000000000"
-        puts "00000000000000000000000000000000000000000000000000000000"
-        
+
       rescue Exception => exc
          logger.error("Message for the log file #{exc.message}")
          flash.notice = 'Error reading from API, falling back to local quizes'
@@ -155,6 +152,8 @@ class AttemptsController < ApplicationController
       end
 
       puts "22222222222222 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+      
+      saveToDatabase(sessionId, @@sessionsQuestions[sessionId])
     end
     
     # puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
@@ -232,6 +231,21 @@ class AttemptsController < ApplicationController
   end
 
 
+  def saveToDatabase(sessionId, questions)
+    puts '------------------------------------------------'
+    puts '------------- saveToDatabase start -----------'
+    puts '------------------------------------------------'
+    for que in questions do
+      puts "que: #{que}"
+      question = Question.new
+      question.sessionid = sessionId
+      question.questionid = que[:id]
+      question.question = que
+      question.save
+      puts "question: #{question}"
+    end
+  end
+  
   # GET /attempts/start
   def start
     puts '------------------------------------'
