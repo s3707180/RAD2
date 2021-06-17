@@ -53,6 +53,9 @@ class AttemptsController < ApplicationController
 
   TOTAL_QUESTIONS = 4
   @@quizSource = nil
+  @@sessionsQuestions = nil
+  @@a = nil
+  
   # GET /attempts/quiz ----------------------
   def quiz
     puts '------------------------------------'
@@ -65,15 +68,33 @@ class AttemptsController < ApplicationController
     puts "session[:current_question_index]: #{session[:current_question_index]}"
     puts "session[:total_questions]: #{session[:total_questions]}"
     puts "session[:correct_answers]: #{session[:correct_answers]}"
+    puts "request.session_options[:id]: #{request.session_options[:id]}"
+    puts "session[:session_id]: #{session[:session_id]}"
+    puts "session.id: #{session.id}"
+    sessionId = session.id.to_s
     puts '-----------------------------'
 
-
+    
+    puts "11 ======================================================= @@a: #{@@a}"
+    if !@@a
+      @@a = "aaaaaaaaaaaaaaaaaa"
+      puts "22 ======================================================= @@a: #{@@a}"
+    end
+    
+    
+    
+    
+    
+    
+    
+    
     if session[:test_complete]
       session[:test_complete] = false
       session[:total_questions] = 0
       session[:correct_answers] = 0
+      session[:current_question_index] = 0;
     end
-
+    
 
     # load the questions if not done so already
     if (!@@quizSource)
@@ -85,13 +106,24 @@ class AttemptsController < ApplicationController
     #if this is a new session and no question in the session
 
     if (!session[:current_question_index])
-      session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
+      # session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
+      session[:current_question_index] = 0
     end
-
     
-    if (!session[:total_questions])
-      session[:total_questions] = 0
+    if (!@@sessionsQuestions)
+      @@sessionsQuestions = Hash.new
     end
+      
+    puts "111111111 @@sessionsQuestions: #{@@sessionsQuestions}"
+    puts "111111111 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+    
+    if  !@@sessionsQuestions[sessionId]
+      @@sessionsQuestions[sessionId] = @@quizSource.shuffle[0,TOTAL_QUESTIONS]
+      puts "22222222222222 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+    end
+    
+    puts "333333333333 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}"
+
 
     if (!session[:correct_answers])
       session[:correct_answers] = 0
@@ -108,7 +140,8 @@ class AttemptsController < ApplicationController
             # answer is not acceptable
             puts '***** answer is not acceptable'
           else
-            @currentQuestion = @@quizSource[session[:current_question_index]]
+            # @currentQuestion = @@quizSource[session[:current_question_index]]
+            @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
 
             answer = params[:answer]
             puts "3333333333333333333"
@@ -122,27 +155,33 @@ class AttemptsController < ApplicationController
               # puts "session[:correct_answers]: #{session[:correct_answers]}"
               session[:correct_answers] += 1;
             end
-            session[:total_questions] += 1;
+            session[:current_question_index] += 1;
             
             #select a new question
-            session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
+            # session[:current_question_index] = getRandomeQuestion(@@quizSource.size);
           end
         end
     end
     
     
     puts '----------------quiz end debug --------------------'
-    puts "session[:total_questions]: #{session[:total_questions]}"
+    puts "session[:current_question_index]: #{session[:current_question_index]}"
     puts "session[:correct_answers]: #{session[:correct_answers]}"
 
 
-    if (session[:total_questions] >= TOTAL_QUESTIONS)
+    if (session[:current_question_index] >= TOTAL_QUESTIONS)
       session[:test_complete] = true
+      session[:total_questions] = session[:current_question_index]
+      session[:current_question_index] = nil
       redirect_to action: "result", notice: "Showing Result."
       return
     end
 
-    @currentQuestion = @@quizSource[session[:current_question_index]]
+    # @currentQuestion = @@quizSource[session[:current_question_index]]
+     @currentQuestion = @@sessionsQuestions[sessionId][session[:current_question_index]]
+     
+     puts "44444444 @currentQuestion: #{@currentQuestion}, #{session[:current_question_index]}"
+     puts "555555555 @@sessionsQuestions[sessionId]: #{@@sessionsQuestions[sessionId]}, size: #{@@sessionsQuestions[sessionId].size}"
   end
 
   def getRandomeQuestion size
@@ -194,7 +233,7 @@ class AttemptsController < ApplicationController
     end
   end
 
-  # DELETE /attempts/1 or /attempts/1.json
+  # DELETE /attempts/1 or /attempts/1.json 
   def destroy
     @attempt.destroy
     respond_to do |format|
